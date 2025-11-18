@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Special Letter 💌</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Dancing Script', cursive;
+    background: url('paper_texture.jpg') center/cover no-repeat;
+    color: #4e342e;
+    padding: 60px;
+    line-height: 1.8;
+  }
+
+  .letter {
+    max-width: 800px;
+    margin: auto;
+    background: rgba(255,255,255,0.8);
+    border-radius: 10px;
+    padding: 40px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    position: relative;
+  }
+
+  .letter::before {
+    content: "💖";
+    position: absolute;
+    font-size: 3em;
+    top: -20px;
+    right: -10px;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.2); opacity: 1; }
+  }
+
+  h1 {
+    text-align: center;
+    color: #d81b60;
+    font-size: 2.5em;
+  }
+
+  p {
+    font-size: 1.3em;
+    margin-bottom: 20px;
+  }
+
+  .end {
+    text-align: right;
+    font-size: 1.5em;
+  }
+
+  .btn-back {
+    display: block;
+    margin: 40px auto 0;
+    padding: 12px 24px;
+    background: #ff4081;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .btn-back:hover {
+    transform: scale(1.1);
+    background: #ff80ab;
+  }
+</style>
+</head>
+<body>
+
+<div class="letter">
+  <h1>Meri sagun,</h1>
+  <p>Tu laad kr soo jaiye to tere ser ko chumu mein .</p>
+<p>Tujhse mohobbat ek taraf .Terese jhagada ek taraf. </p>
+<p>Jis chiz pe tu ungli rakh de tujhko wo dilwani hai.</p>
+<p>Teri Khushi sbse pehle sasta mahenga ek taraf.</p> 
+<p>Sari duniya kuch bhi bole sbko chor ke apnaya hai .</p>
+<p>Sbka kahena ek taraf hai tera kahena ek taraf .</p>
+<p>Tune sari duniya mangi .</p>
+<p>Mene tujhko manga hai .</p>
+<p>Tere sapne sbse pahle mere sapne ek taraf.</p>
+  
+
+  <p class="end">With all my love,<br>💌 your partner</p>
+</div>
+
+<button class="btn-back" onclick="location.href='birthday1.html'">Back to Start 🔄</button>
+
+</body>
+</html>

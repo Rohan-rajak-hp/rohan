@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birthday Memories 📸</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    background: radial-gradient(circle at top, #fbc2eb, #a6c1ee);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  h1 {
+    text-align: center;
+    color: #fff;
+    font-size: 2.5em;
+    text-shadow: 0 3px 10px rgba(0,0,0,0.3);
+    margin-bottom: 20px;
+  }
+
+  .scene {
+    width: 500px;
+    height: 350px;
+    perspective: 1000px;
+    position: relative;
+  }
+
+  .carousel {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+    transition: transform 1.2s ease;
+  }
+
+  .carousel img {
+    position: absolute;
+    width: 300px;
+    height: 200px;
+    left: 100px;
+    top: 75px;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    transition: transform 0.5s, box-shadow 0.5s, filter 0.5s;
+    cursor: pointer;
+  }
+
+  .carousel img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 20px 40px rgba(255, 255, 255, 0.6);
+    filter: brightness(1.2);
+  }
+
+  .controls {
+    margin-top: 40px;
+  }
+
+  button {
+    background: rgba(255,255,255,0.9);
+    color: #ff4081;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    margin: 0 10px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  button:hover {
+    transform: scale(1.1);
+    background: #ff80ab;
+    color: white;
+  }
+
+  .next-btn {
+    position: absolute;
+    bottom: 30px;
+    background: #ff4081;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.3s;
+  }
+
+  .next-btn:hover {
+    transform: scale(1.1);
+    background: #ff80ab;
+  }
+</style>
+</head>
+<body>
+ 
+<h1>📸 Beautiful Memories Together</h1>
+
+<div class="scene">
+  <div class="carousel" id="carousel">
+    <img src="s1.jpg" alt="Memory 1">
+    <img src="s3.jpg" alt="Memory 2">
+    <img src="s4.jpg" alt="Memory 3">
+    <img src="s5.jpg" alt="Memory 4">
+    <img src="s6.jpg" alt="Memory 5">
+    <img src="p8.jpg" alt="Memory 6">
+    <img src="p0.jpg" alt="Memory 7">
+    <img src="p1.jpg" alt="Memory 8">
+  </div>
+</div>
+
+<div class="controls">
+  <button id="prevBtn">⟵ Prev</button>
+  <button id="nextBtn">Next ⟶</button>
+</div>
+
+<button class="next-btn" onclick="location.href='birthday3.html'">Next ➡️</button>
+
+<script>
+  const carousel = document.getElementById('carousel');
+  const images = carousel.querySelectorAll('img');
+  const total = images.length;
+  let angle = 0;
+  const radius = 350;
+
+  // Arrange images in 3D circle
+  images.forEach((img, i) => {
+    const theta = (i / total) * (2 * Math.PI);
+    const x = radius * Math.sin(theta);
+    const z = radius * Math.cos(theta);
+    img.style.transform = `translateX(${x}px) translateZ(${z}px)`;
+  });
+
+  function rotateCarousel(dir) {
+    angle += dir * (360 / total);
+    carousel.style.transform = `rotateY(${angle}deg)`;
+  }
+
+  document.getElementById('nextBtn').addEventListener('click', () => rotateCarousel(-1));
+  document.getElementById('prevBtn').addEventListener('click', () => rotateCarousel(1));
+
+  // Auto-rotate every few seconds
+  setInterval(() => rotateCarousel(-1), 4000);
+
+  // Add mouse drag rotation
+  let isDragging = false;
+  let startX = 0;
+
+  document.querySelector('.scene').addEventListener('mousedown', (e) => {
+    isDragging = true;
+    startX = e.clientX;
+  });
+
+  window.addEventListener('mouseup', () => isDragging = false);
+
+  window.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    const delta = e.clientX - startX;
+    startX = e.clientX;
+    angle += delta * 0.3;
+    carousel.style.transform = `rotateY(${angle}deg)`;
+  });
+</script>
+
+</body>
+</html>
+<audio id="bg-music" autoplay loop>
+    <source src="song 1.mp3" type="audio/mpeg">
+    Your browser does not support the audio tag.
+  </audio>

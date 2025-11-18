@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday SAGUN 🎉</title>
+
+<style>
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    overflow: hidden;
+    height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ===== Background Video ===== */
+  .video-bg {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+    filter: brightness(0.6);
+  }
+
+  /* ===== Overlay Gradient ===== */
+  .overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top, rgba(255,64,129,0.3), rgba(0,0,0,0.7));
+    z-index: -1;
+  }
+
+  /* ===== Animated Title ===== */
+  h1 {
+    font-size: 4em;
+    text-shadow: 0 0 20px #ff80ab, 0 0 40px #f50057;
+    animation: glowPulse 2s infinite alternate ease-in-out;
+    text-align: center;
+  }
+
+  @keyframes glowPulse {
+    from { text-shadow: 0 0 10px #ff4081, 0 0 20px #ff80ab; }
+    to { text-shadow: 0 0 30px #ff1744, 0 0 60px #ff80ab; }
+  }
+
+  .subtext {
+    font-size: 1.4em;
+    text-align: center;
+    opacity: 0;
+    text-shadow: 0 0 10px #ff80ab;
+    animation: fadeIn 3s forwards 2s;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== Fireworks ===== */
+  .firework {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: white;
+    border-radius: 50%;
+    animation: explode 1.2s ease-out forwards;
+  }
+
+  @keyframes explode {
+    0% { transform: translate(0, 0) scale(1); opacity: 1; }
+    100% { transform: translate(var(--x), var(--y)) scale(0.2); opacity: 0; }
+  }
+
+  /* ===== Shiny Button ===== */
+  .next-btn {
+    margin-top: 80px;
+    background: linear-gradient(90deg, #ff4081, #f50057);
+    border: none;
+    padding: 14px 32px;
+    font-size: 1.1rem;
+    color: white;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .next-btn::before {
+    content: "";
+    position: absolute;
+    top: 0; left: -75%;
+    width: 50%;
+    height: 100%;
+    background: rgba(255,255,255,0.4);
+    transform: skewX(-20deg);
+    transition: 0.6s;
+  }
+
+  .next-btn:hover::before {
+    left: 130%;
+  }
+
+  .next-btn:hover {
+    transform: scale(1.1);
+    background: linear-gradient(90deg, #ff80ab, #ff4081);
+  }
+
+</style>
+</head>
+<body>
+
+  <!-- 🎥 Background Video -->
+  <video class="video-bg" autoplay muted loop playsinline>
+    <source src="birthday_vid.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <div class="overlay"></div>
+  <audio id="bg-music" autoplay loop>
+    <source src="song2.mp3" type="audio/mpeg">
+    Your browser does not support the audio tag.
+  </audio>
+
+  <!-- 🎉 Content -->
+  <h1>🎉 Happy Birthday, Sagun! 🎂</h1>
+  <p class="subtext">Wishing you a magical day filled with smiles, surprises, and love.</p>
+
+  <button class="next-btn" onclick="location.href='birthday2.html'">See Memories 📸</button>
+
+<script>
+  /* 🎆 Fireworks Animation */
+  function createFirework() {
+    const x = Math.random() * window.innerWidth;
+    const y = Math.random() * window.innerHeight * 0.6;
+
+    for (let i = 0; i < 25; i++) {
+      const particle = document.createElement('div');
+      particle.classList.add('firework');
+      document.body.appendChild(particle);
+      const angle = (Math.PI * 2 * i) / 25;
+      const distance = 100 + Math.random() * 60;
+      particle.style.left = x + 'px';
+      particle.style.top = y + 'px';
+      particle.style.background = `hsl(${Math.random() * 360}, 80%, 60%)`;
+      particle.style.setProperty('--x', `${Math.cos(angle) * distance}px`);
+      particle.style.setProperty('--y', `${Math.sin(angle) * distance}px`);
+      setTimeout(() => particle.remove(), 1200);
+    }
+  }
+
+  const music = document.getElementById('bg-music');
+
+  // Try to play immediately
+  window.addEventListener('load', () => {
+    music.play().catch(() => {
+      // If browser blocks autoplay, retry when user clicks
+      document.body.addEventListener('click', () => {
+        music.play();
+      }, { once: true });
+    });
+  });
+
+
+  setInterval(createFirework, 1500);
+</script>
+
+</body>
+</html>
